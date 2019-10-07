@@ -8,15 +8,15 @@ NVIM v0.3.8
 
 | 快捷键 |         作用         |
 | :----: | :------------------: |
-|  <F1>  |         帮助         |
-|  <F2>  |         make         |
-|  <F3>  |       make run       |
-|  <F4>  |      make clean      |
-|  <F5>  |     编译单个文件     |
-|  <F6>  |     运行单个文件     |
-|  <F7>  |  打开或关闭NERDTree  |
-|  <F8>  |   打开或关闭tagbar   |
-|  <F9>  | 代码格式化autoformat |
+|  F1  |         帮助         |
+|  F2  |         make         |
+|  F3  |       make run       |
+|  F4  |      make clean      |
+|  F5 |     编译单个文件     |
+|  F6  |     运行单个文件     |
+|  F7  |  打开或关闭NERDTree  |
+|  F8  |   打开或关闭tagbar   |
+|  F9  | 代码格式化autoformat |
 
 ## 插件
 
