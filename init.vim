@@ -11,7 +11,7 @@ autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
 Plug 'Valloric/YouCompleteMe'
 " YouCompleteMe:语句补全插件
-set runtimepath+=~/.vim/bundle/YouCompleteMe
+set runtimepath+=~/.local/share/nvim/plugged/YouCompleteMe
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif		"离开插入模式后自动关闭预览窗口"
 let g:ycm_auto_trigger=1
 let g:ycm_collect_identifiers_from_tags_files = 1           " 开启 YCM基于tags标签引擎
@@ -55,15 +55,17 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme='papercolor'
-let g:airline#extensions#tabline#tab_nr_type = 0 " # of splits (default)
+"let g:airline#extensions#tabline#tab_nr_type = 0 " # of splits (default)
 "let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
-"let g:airline#extensions#tabline#tab_nr_type = 2 " splits and tab number
+let g:airline#extensions#tabline#tab_nr_type = 2 " splits and tab number
 let g:airline#extensions#tabline#tabnr_formatter = 'tabnr'
+let g:airline_section_b = '%{strftime("%c")}'
 "unicode symbols
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#languageclient#enabled = 1
 let g:airline#extensions#tabline#show_tab_count = 1
 let g:airline#extensions#tabline#buffer_nr_format = '%s: '
+let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline_symbols_ascii = 1
 let g:airline_mode_map = {
 			\ '__'     : '-',
@@ -192,6 +194,9 @@ let g:NERDTreeIndicatorMapCustom = {
 "NERDTree插件，显示git status标志
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
+"文件图标
+Plug 'ryanoasis/vim-devicons'
+
 "代码检查工具
 Plug 'w0rp/ale'
 highlight ALEWarning ctermbg=red
@@ -295,20 +300,35 @@ let g:startify_change_to_dir = 1
 
 "主题
 Plug 'sjl/badwolf'
+Plug 'nlknguyen/papercolor-theme'
 Plug 'altercation/vim-colors-solarized'
 Plug 'tomasr/molokai'
 Plug 'nanotech/jellybeans.vim'
 Plug 'w0ng/vim-hybrid'
 Plug 'larssmit/vim-getafe'
 Plug 'morhetz/gruvbox'
+Plug 'joshdick/onedark.vim'
+Plug 'jnurmine/zenburn'
+
+Plug 'shougo/echodoc.vim'
+let g:echodoc#enable_at_startup = 1
+let g:echodoc#type = 'floating'
+" To use a custom highlight for the float window,
+" change Pmenu to your highlight group
+highlight link EchoDocFloat Pmenu
 
 call plug#end()
 
+"colorscheme solarized
+"let g:solarized_termcolors=256
+"let g:solarized_contrast  = "low"
 "colorscheme hybrid
-colorscheme molokai
+"colorscheme molokai
+"colorscheme zenburn
+colorschem PaperColor
 
 "对于某些主题，高亮的颜色可能看不清楚，可以在 Nvim 设置中加入
-hi HighlightedyankRegion cterm=reverse gui=reverse
+"hi HighlightedyankRegion cterm=reverse gui=reverse
 
 "键盘命令
 "设置 leader 键，例子为空格键，也可以设置为其他的
@@ -330,17 +350,19 @@ filetype on
 filetype plugin on
 "为特定文件类型载入相关缩进文件
 filetype indent on
+"底部不显示三种模式,不然echodoc.vim会冲突
+set noshowmode
 "设置当文件被改动时自动载入
 set autoread
 " 在接受补全后不分裂出一个窗口显示接受的项
 set completeopt-=preview
-set completeopt=longest,menu
+"set completeopt=longest,menu
+"设置背景为黑色
+set background=dark
 "代码补全
 "set completeopt=preview,menu
 "共享剪贴板
 set clipboard=unnamed
-"从不备份
-set nobackup
 "自动保存
 set autowrite
 set ruler                   " 打开状态栏标尺
@@ -432,8 +454,6 @@ set matchtime=1
 set scrolloff=3
 "为C程序提供自动缩进
 set smartindent
-"开启语法高亮
-syntax on
 " 高亮显示普通txt文件（需要txt.vim脚本）
 au BufRead,BufNewFile *  setfiletype txt
 "Smart way to move between windows
@@ -442,7 +462,9 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
+"打开shell
 nmap <leader>t :vs term://$SHELL<CR>
+
 "切换Buffer
 nnoremap <TAB> :bnext<CR>
 nmap<leader>1 :b1<CR>
