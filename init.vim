@@ -7,8 +7,6 @@ Plug 'vim-scripts/DoxygenToolkit.vim'
 "Go语言
 Plug 'fatih/vim-go'
 
-autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-
 Plug 'Valloric/YouCompleteMe'
 " YouCompleteMe:语句补全插件
 set runtimepath+=~/.local/share/nvim/plugged/YouCompleteMe
@@ -50,7 +48,9 @@ let g:instant_markdown_autostart = 0
 "if/endif补全
 Plug 'tpope/vim-endwise'
 
-"状态栏
+"git 插件
+Plug 'tpope/vim-fugitive'
+
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 let g:airline#extensions#tabline#enabled = 1
@@ -59,7 +59,12 @@ let g:airline_theme='papercolor'
 "let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
 let g:airline#extensions#tabline#tab_nr_type = 2 " splits and tab number
 let g:airline#extensions#tabline#tabnr_formatter = 'tabnr'
-let g:airline_section_b = '%{strftime("%c")}'
+"显示时间
+let g:airline_section_b = '%{strftime("%T")}'
+"显示路径
+let g:airline_section_c = '%{getcwd()}'
+"显示git status
+let g:airline_section_x = '%{fugitive#statusline()}%y'
 "unicode symbols
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#languageclient#enabled = 1
@@ -199,8 +204,8 @@ Plug 'ryanoasis/vim-devicons'
 
 "代码检查工具
 Plug 'w0rp/ale'
-highlight ALEWarning ctermbg=red
-highlight ALEError ctermbg=red
+highlight ALEWarning ctermbg=yellow
+highlight ALEError ctermbg=black
 "始终开启标志列
 let g:ale_sign_column_always = 1
 let g:ale_set_highlights = 1
@@ -213,14 +218,13 @@ let g:ale_statusline_format = ['✗ %d', '⚡ %d', '✔ OK']
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 "let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-let g:ale_echo_msg_format = '[%linter%] %code: %%s'
+"let g:ale_echo_msg_format = '[%linter%] %code: %%s'
 let g:ale_echo_cursor = 1
 "use the quickfix list instead of the loclist
 let g:ale_open_list = 1
-let g:ale_keep_list_window_open = 1
 let g:ale_set_quickfix = 0
 let g:ale_keep_list_window_open = 0
-let g:ale_set_loclist = 0
+let g:ale_set_loclist = 1
 let g:ale_set_balloons = 1
 let g:ale_completion_enabled = 0
 let g:ale_c_clang_options = 'std=c17 -Wall'

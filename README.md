@@ -66,5 +66,3 @@ NVIM v0.3.8
    ```shell
    sudo aptitude install astyle clang-format python-pep8 python3-pep8 python-autopep8 yapf
    ```
-
-   
