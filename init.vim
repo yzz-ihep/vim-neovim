@@ -8,7 +8,7 @@ Plug 'vim-scripts/DoxygenToolkit.vim'
 Plug 'fatih/vim-go'
 
 Plug 'Valloric/YouCompleteMe'
-" YouCompleteMe:语句补全插件
+"YouCompleteMe:语句补全插件
 set runtimepath+=~/.local/share/nvim/plugged/YouCompleteMe
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif		"离开插入模式后自动关闭预览窗口"
 let g:ycm_auto_trigger=1
@@ -29,7 +29,7 @@ let g:ycm_max_diagnostics_to_display = 0
 "nnoremap <leader>j :YcmCompleter GoToDefinitionElseDeclaration<CR>     " 跳转到定义处
 let g:ycm_min_num_of_chars_for_completion=2                 " 从第2个键入字符就开始罗列匹配项 "
 let g:YouCompleteMe#enable_at_startup=1
-" 不查询ultisnips提供的代码模板补全，如果需要，设置成1即可
+"不查询ultisnips提供的代码模板补全，如果需要，设置成1即可
 let g:ycm_use_ultisnips_completer = 1
 
 Plug 'SirVer/ultisnips'
@@ -53,7 +53,8 @@ Plug 'tpope/vim-fugitive'
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#enabled = 1
+let g:airline_extensions = ['tabline']
 let g:airline_theme='papercolor'
 "let g:airline#extensions#tabline#tab_nr_type = 0 " # of splits (default)
 "let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
@@ -221,11 +222,13 @@ let g:ale_echo_msg_warning_str = 'W'
 "let g:ale_echo_msg_format = '[%linter%] %code: %%s'
 let g:ale_echo_cursor = 1
 "use the quickfix list instead of the loclist
-let g:ale_open_list = 1
-let g:ale_set_quickfix = 0
+let g:ale_open_list = 0
+"Show 5 lines of errors (default: 10)
+let g:ale_list_window_size = 3
+let g:ale_set_quickfix = 1
 let g:ale_keep_list_window_open = 0
 let g:ale_set_loclist = 1
-let g:ale_set_balloons = 1
+let g:ale_set_balloons = 0
 let g:ale_completion_enabled = 0
 let g:ale_c_clang_options = 'std=c17 -Wall'
 let g:ale_cpp_clangcheck_option = 'std=c17 -Wall'

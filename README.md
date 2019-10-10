@@ -63,6 +63,9 @@ NVIM v0.3.8
 
 3. auto-format：需要相应语言的格式化工具，对于Debian系在终端执行下面命令即可完成安装
 
+4. vim-go：因为墙的问题可能无法下载包，需要更改GO代理，GOPROXY=https://mirrors.aliyun.com/goproxy/，另外golint需要在github下载后放到$GOPATH/src/golang.org/x/lint目录下在执行go get -u golang.org/x/lint/golint
+
+
    ```shell
    sudo aptitude install astyle clang-format python-pep8 python3-pep8 python-autopep8 yapf
    ```
