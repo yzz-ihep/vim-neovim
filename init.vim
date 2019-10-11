@@ -1,5 +1,5 @@
 " 安装插件位置
-call plug#begin('~/.local/share/nvim/plugged')
+call plug#begin('/home/yzz/.local/share/nvim/plugged')
 
 "注释自动生成
 Plug 'vim-scripts/DoxygenToolkit.vim'
@@ -23,7 +23,7 @@ let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
 let g:ycm_complete_in_comments = 1                          " 在注释输入中也能补全
 let g:ycm_complete_in_strings = 1                           " 在字符串输入中也能补全
 let g:ycm_collect_identifiers_from_comments_and_strings = 1 " 注释和字符串中的文字也会被收入补全
-let g:ycm_global_ycm_extra_conf = '~/.local/share/nvim/plugged/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = '/home/yzz/.local/share/nvim/plugged/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py'
 let g:ycm_show_diagnostics_ui = 0                           " 禁用语法检查
 let g:ycm_max_diagnostics_to_display = 0
 "nnoremap <leader>j :YcmCompleter GoToDefinitionElseDeclaration<CR>     " 跳转到定义处
@@ -513,7 +513,7 @@ func! Compile()
 	elseif &filetype == 'sh'
 		:!time bash %
 	elseif &filetype == 'go'
-		exec 'make'
+		exec 'GoBuild'
 	elseif &filetype == 'java'
 		exec '!javac %'
 	endif
