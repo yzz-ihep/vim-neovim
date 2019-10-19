@@ -1,4 +1,4 @@
-" 安装插件位置
+"安装插件位置
 call plug#begin('~/.local/share/nvim/plugged')
 
 "注释自动生成
@@ -7,30 +7,33 @@ Plug 'vim-scripts/DoxygenToolkit.vim'
 "Go语言
 Plug 'fatih/vim-go'
 
+"cmake
+Plug 'rperier/vim-cmake-syntax'
+Plug 'richq/vim-cmake-completion'
+
 Plug 'Valloric/YouCompleteMe'
 " YouCompleteMe:语句补全插件
-set runtimepath+=~/.local/share/nvim/plugged/YouCompleteMe
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif		"离开插入模式后自动关闭预览窗口"
+let g:YouCompleteMe#enable_at_startup=1
 let g:ycm_auto_trigger=1
+let g:ycm_cache_omnifunc = 1
+let g:ycm_collect_identifiers_from_comments_and_strings = 1 " 注释和字符串中的文字也会被收入补全
 let g:ycm_collect_identifiers_from_tags_files = 1           " 开启 YCM基于tags标签引擎
-let g:ycm_collect_identifiers_from_comments_and_strings = 1 " 注释与字符串中的内容也用于补全
-let g:syntastic_ignore_files=[".*\.py$"]
-let g:ycm_seed_identifiers_with_syntax = 1                  " 语法关键字补全
-let g:ycm_complete_in_comments = 1
-let g:ycm_key_invoke_completion=""
-let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']  " 映射按键,没有这个会拦截掉tab, 导致其他插件的tab不能用.
-let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
 let g:ycm_complete_in_comments = 1                          " 在注释输入中也能补全
 let g:ycm_complete_in_strings = 1                           " 在字符串输入中也能补全
-let g:ycm_collect_identifiers_from_comments_and_strings = 1 " 注释和字符串中的文字也会被收入补全
 let g:ycm_global_ycm_extra_conf = '~/.local/share/nvim/plugged/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py'
-let g:ycm_show_diagnostics_ui = 0                           " 禁用语法检查
+let g:ycm_key_invoke_completion=""
+let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
+let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']  " 映射按键,没有这个会拦截掉tab, 导致其他插件的tab不能用.
 let g:ycm_max_diagnostics_to_display = 0
-"nnoremap <leader>j :YcmCompleter GoToDefinitionElseDeclaration<CR>     " 跳转到定义处
 let g:ycm_min_num_of_chars_for_completion=2                 " 从第2个键入字符就开始罗列匹配项 "
-let g:YouCompleteMe#enable_at_startup=1
-" 不查询ultisnips提供的代码模板补全，如果需要，设置成1即可
+let g:ycm_python_binary_path = '/home/yzz/snap/anaconda3/bin/python3'
+let g:ycm_seed_identifiers_with_syntax = 1                  " 语法关键字补全
+let g:ycm_show_diagnostics_ui = 0                           " 禁用语法检查
+"查询ultisnips提供的代码模板补全
 let g:ycm_use_ultisnips_completer = 1
+"nnoremap <leader>j :YcmCompleter GoToDefinitionElseDeclaration<CR>     " 跳转到定义处
+"let g:syntastic_ignore_files=[".*\.py$"]
 
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
@@ -53,7 +56,8 @@ Plug 'tpope/vim-fugitive'
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#enabled = 1
+let g:airline_extensions = ['tabline']
 let g:airline_theme='papercolor'
 "let g:airline#extensions#tabline#tab_nr_type = 0 " # of splits (default)
 "let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
@@ -164,6 +168,8 @@ let g:formatters_cpp = ['my_cpp']
 "let g:formatters_c = ['allman']
 "let g:autoformat_verbosemode=1
 
+"nerdtree高亮
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 "文件浏览插件 nerdtree
 Plug 'scrooloose/nerdtree'
 "NERDTree 配置:F7快捷键显示当前目录树
@@ -222,9 +228,11 @@ let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_cursor = 1
 "use the quickfix list instead of the loclist
 let g:ale_open_list = 1
+"Show 5 lines of errors (default: 10)
+let g:ale_list_window_size = 3
 let g:ale_set_quickfix = 0
 let g:ale_keep_list_window_open = 0
-let g:ale_set_loclist = 1
+let g:ale_set_loclist = 0
 let g:ale_set_balloons = 1
 let g:ale_completion_enabled = 0
 let g:ale_c_clang_options = 'std=c17 -Wall'
@@ -244,6 +252,7 @@ let g:ale_linters = {
 			\   'python': ['flake8'],
 			\   'go': ['golint'],
 			\}
+let g:ale_cmakelint_executable = '/home/yzz/snap/anaconda3/bin/cmakelint'
 
 "高亮显示复制区域
 Plug 'machakann/vim-highlightedyank'
@@ -332,7 +341,7 @@ call plug#end()
 colorschem PaperColor
 
 "对于某些主题，高亮的颜色可能看不清楚，可以在 Nvim 设置中加入
-"hi HighlightedyankRegion cterm=reverse gui=reverse
+hi HighlightedyankRegion cterm=reverse gui=reverse
 
 "键盘命令
 "设置 leader 键，例子为空格键，也可以设置为其他的

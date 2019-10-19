@@ -51,18 +51,22 @@ NVIM v0.3.8
 |                 vim-hybrid                  |        主题（不止这一个）        |
 |                vim-devicons                 |    nerdtree和其他插件提供图标    |
 |                   echodoc                   |  补全函数时在命令栏显示函数签名  |
+|              vim-cmake-syntax               |           cmake语法高亮　　　　　|　
+|            vim-cmake-completion             |           cmake语法补全          |
 
 ## 特殊声明
 
 1. vim-plug：需要手动安装，其他插件在vim（neovim）中执行PlugInsatll就可以
+
 2. vim-devicons：为nerdtree和其他插件提供图标，终端字体必须设置为Droid Sans Mono Nerd Font
-   + 在https://github.com/ryanoasis/nerd-fonts/releases下载字体并用Font Manager安装
-   + Dconf Editor修改终端字体为Droid Sans Mono Nerd Font
++ 在https://github.com/ryanoasis/nerd-fonts/releases下载字体并用Font Manager安装
++ Dconf Editor修改终端字体为Droid Sans Mono Nerd Font
 
 2. YouCompleteMe：需要自己编译，可能需要安装一些库，请自己查看YouCompleteMe的README文件
 
 3. auto-format：需要相应语言的格式化工具，对于Debian系在终端执行下面命令即可完成安装
 
-   ```shell
-   sudo aptitude install astyle clang-format python-pep8 python3-pep8 python-autopep8 yapf
-   ```
+```sh
+sudo aptitude install astyle clang-format python-pep8 python3-pep8 python-autopep8 yapf
+```
+4. vim-cmake-completion：补全时需要ctrl+x、ctrl+o呼出补全菜单
