@@ -12,7 +12,7 @@ Plug 'rperier/vim-cmake-syntax'
 Plug 'richq/vim-cmake-completion'
 
 Plug 'Valloric/YouCompleteMe'
-" YouCompleteMe:语句补全插件
+"YouCompleteMe:语句补全插件
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif		"离开插入模式后自动关闭预览窗口"
 let g:YouCompleteMe#enable_at_startup=1
 let g:ycm_auto_trigger=1
@@ -25,6 +25,7 @@ let g:ycm_global_ycm_extra_conf = '~/.local/share/nvim/plugged/YouCompleteMe/thi
 let g:ycm_key_invoke_completion=""
 let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
 let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']  " 映射按键,没有这个会拦截掉tab, 导致其他插件的tab不能用.
+let g:ycm_key_list_stop_completion = ['<CR>']              " 停止匹配
 let g:ycm_max_diagnostics_to_display = 0
 let g:ycm_min_num_of_chars_for_completion=2                 " 从第2个键入字符就开始罗列匹配项 "
 let g:ycm_python_binary_path = '/home/yzz/snap/anaconda3/bin/python3'
@@ -34,6 +35,10 @@ let g:ycm_show_diagnostics_ui = 0                           " 禁用语法检查
 let g:ycm_use_ultisnips_completer = 1
 "nnoremap <leader>j :YcmCompleter GoToDefinitionElseDeclaration<CR>     " 跳转到定义处
 "let g:syntastic_ignore_files=[".*\.py$"]
+let g:ycm_semantic_triggers =  {
+			\ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
+			\ 'cs,lua,javascript': ['re!\w{2}'],
+			\ }
 
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
@@ -144,11 +149,11 @@ let g:NERDDefaultAlign = 'left'
 " Set a language to use its alternate delimiters by default
 let g:NERDAltDelims_java = 1
 " Add your own custom formats or override the defaults
-let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+"let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
 " Allow commenting and inverting empty lines (useful when commenting a region)
 let g:NERDCommentEmptyLines = 1
 " Enable trimming of trailing whitespace when uncommenting
-let g:NERDTrimTrailingWhitespace = 1
+let g:NERDTrimTrailingWhitespace = 0
 " Enable NERDCommenterToggle to check all selected lines is commented or not
 let g:NERDToggleCheckAllLines = 1
 
@@ -369,7 +374,7 @@ set noshowmode
 set autoread
 " 在接受补全后不分裂出一个窗口显示接受的项
 set completeopt-=preview
-"set completeopt=longest,menu
+set completeopt=longest,menu
 "设置背景为黑色
 set background=dark
 "代码补全
