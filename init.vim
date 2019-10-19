@@ -184,11 +184,7 @@ let g:formatters_cpp = ['my_cpp']
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 "文件浏览插件 nerdtree
 Plug 'scrooloose/nerdtree'
-"NERDTree 配置:F7快捷键显示当前目录树
-let g:NERDTreeDirArrowExpandable = '+'
-let g:NERDTreeDirArrowCollapsible = '-'
 "打开nerdtree
-"map <F7> :NERDTreeMirror<CR>
 map <F7> :NERDTreeToggle<CR>
 let NERDTreeWinSize=25
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
@@ -239,7 +235,6 @@ let g:ale_echo_msg_warning_str = 'W'
 "let g:ale_echo_msg_format = '[%linter%] %code: %%s'
 let g:ale_echo_cursor = 1
 "use the quickfix list instead of the loclist
-<<<<<<< HEAD
 let g:ale_open_list = 1
 "Show 5 lines of errors (default: 10)
 let g:ale_list_window_size = 3
@@ -247,7 +242,6 @@ let g:ale_set_quickfix = 0
 let g:ale_keep_list_window_open = 0
 let g:ale_set_loclist = 0
 let g:ale_set_balloons = 1
-=======
 let g:ale_open_list = 0
 "Show 5 lines of errors (default: 10)
 let g:ale_list_window_size = 3
@@ -255,7 +249,6 @@ let g:ale_set_quickfix = 1
 let g:ale_keep_list_window_open = 0
 let g:ale_set_loclist = 1
 let g:ale_set_balloons = 0
->>>>>>> 731d01e7f7d5209e0ce080b5ae0b0fdb167523cd
 let g:ale_completion_enabled = 0
 let g:ale_c_clang_options = 'std=c17 -Wall'
 let g:ale_cpp_clangcheck_option = 'std=c17 -Wall'
