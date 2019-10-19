@@ -1,5 +1,7 @@
 "安装插件位置
 call plug#begin('~/.local/share/nvim/plugged')
+" 安装插件位置
+call plug#begin('/home/yzz/.local/share/nvim/plugged')
 
 "注释自动生成
 Plug 'vim-scripts/DoxygenToolkit.vim'
@@ -26,12 +28,17 @@ let g:ycm_key_invoke_completion=""
 let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
 let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']  " 映射按键,没有这个会拦截掉tab, 导致其他插件的tab不能用.
 let g:ycm_key_list_stop_completion = ['<CR>']              " 停止匹配
+let g:ycm_collect_identifiers_from_comments_and_strings = 1 " 注释和字符串中的文字也会被收入补全
+let g:ycm_global_ycm_extra_conf = '/home/yzz/.local/share/nvim/plugged/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py'
+let g:ycm_show_diagnostics_ui = 0                           " 禁用语法检查
 let g:ycm_max_diagnostics_to_display = 0
 let g:ycm_min_num_of_chars_for_completion=2                 " 从第2个键入字符就开始罗列匹配项 "
 let g:ycm_python_binary_path = '/home/yzz/snap/anaconda3/bin/python3'
 let g:ycm_seed_identifiers_with_syntax = 1                  " 语法关键字补全
 let g:ycm_show_diagnostics_ui = 0                           " 禁用语法检查
 "查询ultisnips提供的代码模板补全
+let g:YouCompleteMe#enable_at_startup=1
+"不查询ultisnips提供的代码模板补全，如果需要，设置成1即可
 let g:ycm_use_ultisnips_completer = 1
 "nnoremap <leader>j :YcmCompleter GoToDefinitionElseDeclaration<CR>     " 跳转到定义处
 "let g:syntastic_ignore_files=[".*\.py$"]
@@ -232,6 +239,7 @@ let g:ale_echo_msg_warning_str = 'W'
 "let g:ale_echo_msg_format = '[%linter%] %code: %%s'
 let g:ale_echo_cursor = 1
 "use the quickfix list instead of the loclist
+<<<<<<< HEAD
 let g:ale_open_list = 1
 "Show 5 lines of errors (default: 10)
 let g:ale_list_window_size = 3
@@ -239,6 +247,15 @@ let g:ale_set_quickfix = 0
 let g:ale_keep_list_window_open = 0
 let g:ale_set_loclist = 0
 let g:ale_set_balloons = 1
+=======
+let g:ale_open_list = 0
+"Show 5 lines of errors (default: 10)
+let g:ale_list_window_size = 3
+let g:ale_set_quickfix = 1
+let g:ale_keep_list_window_open = 0
+let g:ale_set_loclist = 1
+let g:ale_set_balloons = 0
+>>>>>>> 731d01e7f7d5209e0ce080b5ae0b0fdb167523cd
 let g:ale_completion_enabled = 0
 let g:ale_c_clang_options = 'std=c17 -Wall'
 let g:ale_cpp_clangcheck_option = 'std=c17 -Wall'
@@ -524,7 +541,7 @@ func! Compile()
 	elseif &filetype == 'sh'
 		:!time bash %
 	elseif &filetype == 'go'
-		exec 'make'
+		exec 'GoBuild'
 	elseif &filetype == 'java'
 		exec '!javac %'
 	endif

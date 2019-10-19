@@ -62,11 +62,18 @@ NVIM v0.3.8
 + 在https://github.com/ryanoasis/nerd-fonts/releases下载字体并用Font Manager安装
 + Dconf Editor修改终端字体为Droid Sans Mono Nerd Font
 
-2. YouCompleteMe：需要自己编译，可能需要安装一些库，请自己查看YouCompleteMe的README文件
+3. YouCompleteMe：需要自己编译，可能需要安装一些库，请自己查看YouCompleteMe的README文件
 
-3. auto-format：需要相应语言的格式化工具，对于Debian系在终端执行下面命令即可完成安装
+4. auto-format：需要相应语言的格式化工具，对于Debian系在终端执行下面命令即可完成安装
 
 ```sh
 sudo aptitude install astyle clang-format python-pep8 python3-pep8 python-autopep8 yapf
 ```
-4. vim-cmake-completion：补全时需要ctrl+x、ctrl+o呼出补全菜单
+5. vim-cmake-completion：补全时需要ctrl+x、ctrl+o呼出补全菜单
+
+6. vim-go：因为墙的问题可能无法下载包，解决方法，比如golint需要在github下载后放到$GOPATH/src/golang.org/x/lint目录下再执行GoInstallBinaries
+
+
+```shell
+sudo aptitude install astyle clang-format python-pep8 python3-pep8 python-autopep8 yapf
+```
