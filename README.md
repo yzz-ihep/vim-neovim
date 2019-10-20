@@ -31,7 +31,7 @@ NVIM v0.3.8
 |                   vim-go                    |            Go语言支持            |
 |                YouCompleteMe                |           语句补全插件           |
 |           ultisnips和vim-snippets           |             代码片段             |
-| markdown-preview.nvim和vim-instant-markdown |           markdown预览           |
+| markdown-preview.nvim和plasticboy/vim-markdown |           markdown预览和语法显示           |
 |                 vim-endwise                 |           if/endif补全           |
 |       vim-airline和vim-airline-themes       |              状态栏              |
 |                 indentline                  |            对齐可视化            |
@@ -51,7 +51,7 @@ NVIM v0.3.8
 |                 vim-hybrid                  |        主题（不止这一个）        |
 |                vim-devicons                 |    nerdtree和其他插件提供图标    |
 |                   echodoc                   |  补全函数时在命令栏显示函数签名  |
-|              vim-cmake-syntax               |           cmake语法高亮　　　　　|　
+|              vim-cmake-syntax               |           cmake语法高亮　　　　　|
 |            vim-cmake-completion             |           cmake语法补全          |
 
 ## 特殊说明
