@@ -52,13 +52,12 @@ Plug 'honza/vim-snippets'
 
 "markdown预览
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
-Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
-"let g:instant_markdown_slow = 1
-let g:instant_markdown_autostart = 0
-"let g:instant_markdown_open_to_the_world = 1
-"let g:instant_markdown_allow_unsafe_content = 1
-"let g:instant_markdown_allow_external_content = 0
-"let g:instant_markdown_mathjax = 1
+"markdown语法
+Plug 'plasticboy/vim-markdown'
+let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_no_default_key_mappings = 1
+let g:vim_markdown_toc_autofit = 1
+let g:vim_markdown_conceal = 0
 
 "if/endif补全
 Plug 'tpope/vim-endwise'
@@ -168,6 +167,13 @@ let g:NERDToggleCheckAllLines = 1
 Plug 'godlygeek/tabular'
 "代码对齐可视化
 Plug 'yggdroot/indentline'
+" Vim
+let g:indentLine_color_term = 139
+" GVim
+"let g:indentLine_color_gui = '#A4E57E'
+" Background (Vim, GVim)
+let g:indentLine_bgcolor_term = 256
+"let g:indentLine_bgcolor_gui = '#FF5F00'
 
 "代码自动 format 插件
 Plug 'chiel92/vim-autoformat'
@@ -525,7 +531,7 @@ func! Compile()
 		"exec '!g++ -Wall % -o %< -std=c++11 -lmysqlclient'
 		exec '!gcc -Wall % -o %<'
 	elseif &filetype == 'cpp'
-		exec '!g++ -Wall % -o %< -std=c++17 -lpthread -lboost_system'
+		exec '!g++ -Wall % -o %< -std=c++17 -lpthread -lboost_thread -lboost_system'
 		"exec '!clang++ -Wall % -o %< -std=c++11 -lpthread '
 		"exec '!clang++ -Wall % -o %< -std=c++11 -lmysqlcppconn'
 		"exec '!g++ -Wall % -o %< -std=c++17'
