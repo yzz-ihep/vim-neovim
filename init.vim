@@ -154,8 +154,6 @@ let g:NERDCompactSexyComs = 1
 let g:NERDDefaultAlign = 'left'
 " Set a language to use its alternate delimiters by default
 let g:NERDAltDelims_java = 1
-" Add your own custom formats or override the defaults
-"let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
 " Allow commenting and inverting empty lines (useful when commenting a region)
 let g:NERDCommentEmptyLines = 1
 " Enable trimming of trailing whitespace when uncommenting
@@ -188,6 +186,7 @@ let g:formatters_cpp = ['my_cpp']
 
 "nerdtree高亮
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+
 "文件浏览插件 nerdtree
 Plug 'scrooloose/nerdtree'
 "打开nerdtree
@@ -202,6 +201,7 @@ let NERDTreeMinimalUI=1
 let NERDTreeAutoDeleteBuffer=1
 let g:NERDTreeShowIgnoredStatus = 1
 let g:NERDTreeShowLineNumbers=1
+let g:NERDTreeWinPos = 'left'
 
 let g:NERDTreeIndicatorMapCustom = {
 			\ "Modified"  : "✹",
@@ -288,6 +288,7 @@ Plug 'pbrisbin/vim-mkdir'
 "变量函数查看
 Plug 'majutsushi/tagbar'
 nmap <F8> :TagbarToggle<CR>
+let g:tagbar_left = 0
 let g:tagbar_compact = 1
 let g:tagbar_indent = 1
 let g:tagbar_show_visibility = 1
@@ -296,6 +297,7 @@ let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
+let g:tagbar_width = 25
 
 let g:tagbar_type_go = {
 			\ 'ctagstype' : 'go',
