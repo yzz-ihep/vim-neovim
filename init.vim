@@ -278,7 +278,6 @@ let g:ale_cmakelint_executable = '/home/yzz/snap/anaconda3/bin/cmakelint'
 "高亮显示复制区域
 Plug 'machakann/vim-highlightedyank'
 
-
 " 高亮持续时间为 1000 毫秒
 let g:highlightedyank_highlight_duration = 1000
 
