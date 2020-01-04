@@ -1,5 +1,3 @@
-"安装插件位置
-call plug#begin('~/.local/share/nvim/plugged')
 " 安装插件位置
 call plug#begin('/home/yzz/.local/share/nvim/plugged')
 
@@ -8,6 +6,10 @@ Plug 'vim-scripts/DoxygenToolkit.vim'
 
 "Go语言
 Plug 'fatih/vim-go'
+
+".h和.cpp跳转
+Plug 'derekwyatt/vim-fswitch'
+nmap <Leader>f :FSHere<CR>
 
 "cmake
 Plug 'rperier/vim-cmake-syntax'
@@ -67,24 +69,22 @@ Plug 'tpope/vim-fugitive'
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-"let g:airline#extensions#tabline#enabled = 1
 let g:airline_extensions = ['tabline']
-let g:airline_theme='papercolor'
-"let g:airline#extensions#tabline#tab_nr_type = 0 " # of splits (default)
-"let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
+let g:airline_theme='dark_minimal'
 let g:airline#extensions#tabline#tab_nr_type = 2 " splits and tab number
 let g:airline#extensions#tabline#tabnr_formatter = 'tabnr'
 "显示时间
-let g:airline_section_b = '%{strftime("%T")}'
+"let g:airline_section_b = '%{strftime("%T")}'
 "显示路径
 let g:airline_section_c = '%{getcwd()}'
 "显示git status
-let g:airline_section_x = '%{fugitive#statusline()}%y'
+let g:airline_section_b = '%{FugitiveStatusline()}'
+
 "unicode symbols
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#languageclient#enabled = 1
 let g:airline#extensions#tabline#show_tab_count = 1
-let g:airline#extensions#tabline#buffer_nr_format = '%s: '
+let g:airline#extensions#tabline#buffer_nr_format = '%s:'
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline_symbols_ascii = 1
 let g:airline_mode_map = {
@@ -118,16 +118,16 @@ let g:airline_left_sep = '»'
 let g:airline_left_alt_sep = '❯'
 "let g:airline_left_sep = '▶'
 let g:airline_right_sep = '«'
-"let g:airline_right_alt_sep = '❮'
-let g:airline_right_alt_sep = '<-'
+let g:airline_right_alt_sep = '❮'
+"let g:airline_right_alt_sep = '<-'
 "let g:airline_right_sep = '◀'
 let g:airline_symbols.crypt = '🔒'
 "let g:airline_symbols.linenr = '☰'
 "let g:airline_symbols.linenr = '␊'
 let g:airline_symbols.linenr = '␤'
-let g:airline_symbols.maxlinenr = ''
+"let g:airline_symbols.maxlinenr = ''
+let g:airline_symbols.maxlinenr = '㏑'
 "let g:airline_symbols.linenr = '¶'
-"let g:airline_symbols.maxlinenr = '㏑'
 let g:airline_symbols.branch = '⎇'
 "let g:airline_symbols.paste = 'ρ'
 "let g:airline_symbols.paste = 'Þ'
@@ -176,7 +176,7 @@ let g:indentLine_bgcolor_term = 256
 "代码自动 format 插件
 Plug 'chiel92/vim-autoformat'
 noremap <F9> :Autoformat<CR>:w<CR><CR>
-let g:formatdef_my_cpp = '"astyle --style=linux --indent-classes --pad-oper"'
+let g:formatdef_my_cpp = '"astyle --style=java --pad-oper"'
 let g:formatters_cpp = ['my_cpp']
 "let g:formatdef_allman = '"astyle --style=allman --pad-oper"'
 "let g:formatexpr
@@ -241,16 +241,9 @@ let g:ale_echo_msg_warning_str = 'W'
 "let g:ale_echo_msg_format = '[%linter%] %code: %%s'
 let g:ale_echo_cursor = 1
 "use the quickfix list instead of the loclist
-let g:ale_open_list = 1
 "Show 5 lines of errors (default: 10)
-let g:ale_list_window_size = 3
-let g:ale_set_quickfix = 0
-let g:ale_keep_list_window_open = 0
-let g:ale_set_loclist = 0
-let g:ale_set_balloons = 1
+"let g:ale_list_window_size = 3
 let g:ale_open_list = 0
-"Show 5 lines of errors (default: 10)
-let g:ale_list_window_size = 3
 let g:ale_set_quickfix = 1
 let g:ale_keep_list_window_open = 0
 let g:ale_set_loclist = 1
@@ -277,7 +270,6 @@ let g:ale_cmakelint_executable = '/home/yzz/snap/anaconda3/bin/cmakelint'
 
 "高亮显示复制区域
 Plug 'machakann/vim-highlightedyank'
-
 " 高亮持续时间为 1000 毫秒
 let g:highlightedyank_highlight_duration = 1000
 
@@ -501,16 +493,8 @@ map <C-l> <C-W>l
 nmap <leader>t :vs term://$SHELL<CR>
 
 "切换Buffer
-nnoremap <TAB> :bnext<CR>
-nmap<leader>1 :b1<CR>
-nmap<leader>2 :b2<CR>
-nmap<leader>3 :b3<CR>
-nmap<leader>4 :b4<CR>
-nmap<leader>5 :b5<CR>
-nmap<leader>6 :b6<CR>
-nmap<leader>7 :b7<CR>
-nmap<leader>8 :b8<CR>
-nmap<leader>9 :b9<CR>
+nnoremap <leader>j :bnext<CR>
+nnoremap <leader>k :bprevious<CR>
 
 "回到上次打开位置
 if has("autocmd")
@@ -532,7 +516,7 @@ func! Compile()
 		"exec '!g++ -Wall % -o %< -std=c++11 -lmysqlclient'
 		exec '!gcc -Wall % -o %<'
 	elseif &filetype == 'cpp'
-		exec '!g++ -Wall % -o %< -std=c++17 -lpthread -lboost_thread -lboost_system'
+		exec '!g++ -Wall % -o %< -std=c++17'
 		"exec '!clang++ -Wall % -o %< -std=c++11 -lpthread '
 		"exec '!clang++ -Wall % -o %< -std=c++11 -lmysqlcppconn'
 		"exec '!g++ -Wall % -o %< -std=c++17'
@@ -556,15 +540,19 @@ func! Run()
 		exec '!time ./%<'
 	elseif &filetype == 'python'
 		exec '!time python %'
+	elseif &filetype == 'java'
+		exec '!java %<'
 	elseif &filetype == 'go'
 		exec 'GoRun'
 	elseif &filetype == 'sh'
 		:!time bash %
-	elseif &filetype == 'java'
-		exec '!java %'
 	endif
 endfunc
 
-map <F2> :make<CR>
-map <F3> :make run<CR>
-map <F4> :make clean<CR>
+"nmap <F2> :make<CR>
+"nmap <F3> :make run<CR>
+"nmap <F4> :make clean<CR>
+
+nmap <F2> :!cd build && cmake ..<CR>
+nmap <F3> :!cd build && make<CR>
+nmap <F4> :!cd build && make run<CR>
