@@ -3,47 +3,81 @@ call plug#begin('/home/yzz/.local/share/nvim/plugged')
 
 "注释自动生成
 Plug 'vim-scripts/DoxygenToolkit.vim'
+let g:DoxygenToolkit_briefTag_funcName = "yes"
+
+" for C++ style, change the '@' to '\'
+let g:DoxygenToolkit_commentType = "C++"
+let g:DoxygenToolkit_briefTag_pre = "\\brief "
+let g:DoxygenToolkit_templateParamTag_pre = "\\tparam "
+let g:DoxygenToolkit_paramTag_pre = "\\param "
+let g:DoxygenToolkit_returnTag = "\\return "
+let g:DoxygenToolkit_throwTag_pre = "\\throw " " @exception is also valid
+let g:DoxygenToolkit_fileTag = "\\file "
+let g:DoxygenToolkit_dateTag = "\\date "
+let g:DoxygenToolkit_authorTag = "\\author "
+let g:DoxygenToolkit_versionTag = "\\version "
+let g:DoxygenToolkit_blockTag = "\\name "
+let g:DoxygenToolkit_classTag = "\\class "
+let g:DoxygenToolkit_authorName = "yuzz"
+let g:doxygen_enhanced_color = 1
+"let g:load_doxygen_syntax = 1
 
 "Go语言
 Plug 'fatih/vim-go'
 
+".h和.cpp切换
+Plug 'derekwyatt/vim-fswitch'
+
+"cmake
+Plug 'rperier/vim-cmake-syntax'
+Plug 'richq/vim-cmake-completion'
+
 Plug 'Valloric/YouCompleteMe'
 "YouCompleteMe:语句补全插件
-set runtimepath+=~/.local/share/nvim/plugged/YouCompleteMe
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif		"离开插入模式后自动关闭预览窗口"
+let g:YouCompleteMe#enable_at_startup=1
 let g:ycm_auto_trigger=1
+let g:ycm_cache_omnifunc = 1
+let g:ycm_collect_identifiers_from_comments_and_strings = 1 " 注释和字符串中的文字也会被收入补全
 let g:ycm_collect_identifiers_from_tags_files = 1           " 开启 YCM基于tags标签引擎
-let g:ycm_collect_identifiers_from_comments_and_strings = 1 " 注释与字符串中的内容也用于补全
-let g:syntastic_ignore_files=[".*\.py$"]
-let g:ycm_seed_identifiers_with_syntax = 1                  " 语法关键字补全
-let g:ycm_complete_in_comments = 1
-let g:ycm_key_invoke_completion=""
-let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']  " 映射按键,没有这个会拦截掉tab, 导致其他插件的tab不能用.
-let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
 let g:ycm_complete_in_comments = 1                          " 在注释输入中也能补全
 let g:ycm_complete_in_strings = 1                           " 在字符串输入中也能补全
+let g:ycm_global_ycm_extra_conf = '~/.local/share/nvim/plugged/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py'
+let g:ycm_key_invoke_completion=""
+let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
+let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']  " 映射按键,没有这个会拦截掉tab, 导致其他插件的tab不能用.
+let g:ycm_key_list_stop_completion = ['<CR>']              " 停止匹配
 let g:ycm_collect_identifiers_from_comments_and_strings = 1 " 注释和字符串中的文字也会被收入补全
 let g:ycm_global_ycm_extra_conf = '/home/yzz/.local/share/nvim/plugged/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py'
 let g:ycm_show_diagnostics_ui = 0                           " 禁用语法检查
 let g:ycm_max_diagnostics_to_display = 0
-"nnoremap <leader>j :YcmCompleter GoToDefinitionElseDeclaration<CR>     " 跳转到定义处
 let g:ycm_min_num_of_chars_for_completion=2                 " 从第2个键入字符就开始罗列匹配项 "
+let g:ycm_python_binary_path = '/home/yzz/snap/anaconda3/bin/python3'
+let g:ycm_seed_identifiers_with_syntax = 1                  " 语法关键字补全
+let g:ycm_show_diagnostics_ui = 0                           " 禁用语法检查
+"查询ultisnips提供的代码模板补全
 let g:YouCompleteMe#enable_at_startup=1
 "不查询ultisnips提供的代码模板补全，如果需要，设置成1即可
 let g:ycm_use_ultisnips_completer = 1
+"nnoremap <leader>j :YcmCompleter GoToDefinitionElseDeclaration<CR>     " 跳转到定义处
+"let g:syntastic_ignore_files=[".*\.py$"]
+let g:ycm_semantic_triggers =  {
+			\ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
+			\ 'cs,lua,javascript': ['re!\w{2}'],
+			\ }
 
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 "markdown预览
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
+"Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
 Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
 "let g:instant_markdown_slow = 1
 let g:instant_markdown_autostart = 0
 "let g:instant_markdown_open_to_the_world = 1
 "let g:instant_markdown_allow_unsafe_content = 1
 "let g:instant_markdown_allow_external_content = 0
-"let g:instant_markdown_mathjax = 1
+let g:instant_markdown_mathjax = 1
 
 "if/endif补全
 Plug 'tpope/vim-endwise'
@@ -55,22 +89,22 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 "let g:airline#extensions#tabline#enabled = 1
 let g:airline_extensions = ['tabline']
-let g:airline_theme='papercolor'
+let g:airline_theme='dark_minimal'
 "let g:airline#extensions#tabline#tab_nr_type = 0 " # of splits (default)
 "let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
 let g:airline#extensions#tabline#tab_nr_type = 2 " splits and tab number
 let g:airline#extensions#tabline#tabnr_formatter = 'tabnr'
 "显示时间
-let g:airline_section_b = '%{strftime("%T")}'
+"let g:airline_section_b = '%{strftime("%T")}'
 "显示路径
 let g:airline_section_c = '%{getcwd()}'
 "显示git status
-let g:airline_section_x = '%{fugitive#statusline()}%y'
+let g:airline_section_b = '%{FugitiveStatusline()}'
 "unicode symbols
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#languageclient#enabled = 1
 let g:airline#extensions#tabline#show_tab_count = 1
-let g:airline#extensions#tabline#buffer_nr_format = '%s: '
+let g:airline#extensions#tabline#buffer_nr_format = '%s:'
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline_symbols_ascii = 1
 let g:airline_mode_map = {
@@ -141,11 +175,11 @@ let g:NERDDefaultAlign = 'left'
 " Set a language to use its alternate delimiters by default
 let g:NERDAltDelims_java = 1
 " Add your own custom formats or override the defaults
-let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+"let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
 " Allow commenting and inverting empty lines (useful when commenting a region)
 let g:NERDCommentEmptyLines = 1
 " Enable trimming of trailing whitespace when uncommenting
-let g:NERDTrimTrailingWhitespace = 1
+let g:NERDTrimTrailingWhitespace = 0
 " Enable NERDCommenterToggle to check all selected lines is commented or not
 let g:NERDToggleCheckAllLines = 1
 
@@ -153,11 +187,18 @@ let g:NERDToggleCheckAllLines = 1
 Plug 'godlygeek/tabular'
 "代码对齐可视化
 Plug 'yggdroot/indentline'
+" Vim
+let g:indentLine_color_term = 139
+" GVim
+"let g:indentLine_color_gui = '#A4E57E'
+" Background (Vim, GVim)
+let g:indentLine_bgcolor_term = 256
+"let g:indentLine_bgcolor_gui = '#FF5F00'
 
-"代码自动 format 插件
+"代码自动format插件
 Plug 'chiel92/vim-autoformat'
 noremap <F9> :Autoformat<CR>:w<CR><CR>
-let g:formatdef_my_cpp = '"astyle --style=linux --indent-classes --pad-oper"'
+let g:formatdef_my_cpp = '"astyle --attach-namespaces --attach-inlines --attach-classes --indent-classes --indent-col1-comments --pad-oper"'
 let g:formatters_cpp = ['my_cpp']
 "let g:formatdef_allman = '"astyle --style=allman --pad-oper"'
 "let g:formatexpr
@@ -165,13 +206,11 @@ let g:formatters_cpp = ['my_cpp']
 "let g:formatters_c = ['allman']
 "let g:autoformat_verbosemode=1
 
+"nerdtree高亮
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 "文件浏览插件 nerdtree
 Plug 'scrooloose/nerdtree'
-"NERDTree 配置:F7快捷键显示当前目录树
-let g:NERDTreeDirArrowExpandable = '+'
-let g:NERDTreeDirArrowCollapsible = '-'
 "打开nerdtree
-"map <F7> :NERDTreeMirror<CR>
 map <F7> :NERDTreeToggle<CR>
 let NERDTreeWinSize=25
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
@@ -222,6 +261,13 @@ let g:ale_echo_msg_warning_str = 'W'
 "let g:ale_echo_msg_format = '[%linter%] %code: %%s'
 let g:ale_echo_cursor = 1
 "use the quickfix list instead of the loclist
+let g:ale_open_list = 1
+"Show 5 lines of errors (default: 10)
+let g:ale_list_window_size = 3
+let g:ale_set_quickfix = 0
+let g:ale_keep_list_window_open = 0
+let g:ale_set_loclist = 0
+let g:ale_set_balloons = 1
 let g:ale_open_list = 0
 "Show 5 lines of errors (default: 10)
 let g:ale_list_window_size = 3
@@ -247,6 +293,7 @@ let g:ale_linters = {
 			\   'python': ['flake8'],
 			\   'go': ['golint'],
 			\}
+let g:ale_cmakelint_executable = '/home/yzz/snap/anaconda3/bin/cmakelint'
 
 "高亮显示复制区域
 Plug 'machakann/vim-highlightedyank'
@@ -335,7 +382,7 @@ call plug#end()
 colorschem PaperColor
 
 "对于某些主题，高亮的颜色可能看不清楚，可以在 Nvim 设置中加入
-"hi HighlightedyankRegion cterm=reverse gui=reverse
+hi HighlightedyankRegion cterm=reverse gui=reverse
 
 "键盘命令
 "设置 leader 键，例子为空格键，也可以设置为其他的
@@ -363,7 +410,7 @@ set noshowmode
 set autoread
 " 在接受补全后不分裂出一个窗口显示接受的项
 set completeopt-=preview
-"set completeopt=longest,menu
+set completeopt=longest,menu
 "设置背景为黑色
 set background=dark
 "代码补全
@@ -473,16 +520,8 @@ map <C-l> <C-W>l
 nmap <leader>t :vs term://$SHELL<CR>
 
 "切换Buffer
-nnoremap <TAB> :bnext<CR>
-nmap<leader>1 :b1<CR>
-nmap<leader>2 :b2<CR>
-nmap<leader>3 :b3<CR>
-nmap<leader>4 :b4<CR>
-nmap<leader>5 :b5<CR>
-nmap<leader>6 :b6<CR>
-nmap<leader>7 :b7<CR>
-nmap<leader>8 :b8<CR>
-nmap<leader>9 :b9<CR>
+nnoremap <leader>j :bnext<CR>
+nnoremap <leader>k :bprevious<CR>
 
 "回到上次打开位置
 if has("autocmd")
@@ -504,7 +543,7 @@ func! Compile()
 		"exec '!g++ -Wall % -o %< -std=c++11 -lmysqlclient'
 		exec '!gcc -Wall % -o %<'
 	elseif &filetype == 'cpp'
-		exec '!g++ -Wall % -o %< -std=c++17 -lpthread -lboost_system'
+		exec '!g++ -Wall % -o %< -std=c++11 -lpthread -lboost_thread -lboost_system'
 		"exec '!clang++ -Wall % -o %< -std=c++11 -lpthread '
 		"exec '!clang++ -Wall % -o %< -std=c++11 -lmysqlcppconn'
 		"exec '!g++ -Wall % -o %< -std=c++17'
