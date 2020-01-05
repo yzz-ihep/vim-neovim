@@ -1,3 +1,5 @@
+"安装插件位置
+call plug#begin('~/.local/share/nvim/plugged')
 " 安装插件位置
 call plug#begin('/home/yzz/.local/share/nvim/plugged')
 
@@ -70,7 +72,6 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 "markdown预览
-"Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
 Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
 "let g:instant_markdown_slow = 1
 let g:instant_markdown_autostart = 0
@@ -195,7 +196,7 @@ let g:indentLine_color_term = 139
 let g:indentLine_bgcolor_term = 256
 "let g:indentLine_bgcolor_gui = '#FF5F00'
 
-"代码自动format插件
+"代码自动 format 插件
 Plug 'chiel92/vim-autoformat'
 noremap <F9> :Autoformat<CR>:w<CR><CR>
 let g:formatdef_my_cpp = '"astyle --attach-namespaces --attach-inlines --attach-classes --indent-classes --indent-col1-comments --pad-oper"'
@@ -208,6 +209,7 @@ let g:formatters_cpp = ['my_cpp']
 
 "nerdtree高亮
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+
 "文件浏览插件 nerdtree
 Plug 'scrooloose/nerdtree'
 "打开nerdtree
@@ -222,6 +224,7 @@ let NERDTreeMinimalUI=1
 let NERDTreeAutoDeleteBuffer=1
 let g:NERDTreeShowIgnoredStatus = 1
 let g:NERDTreeShowLineNumbers=1
+let g:NERDTreeWinPos = 'left'
 
 let g:NERDTreeIndicatorMapCustom = {
 			\ "Modified"  : "✹",
@@ -298,7 +301,6 @@ let g:ale_cmakelint_executable = '/home/yzz/snap/anaconda3/bin/cmakelint'
 "高亮显示复制区域
 Plug 'machakann/vim-highlightedyank'
 
-
 " 高亮持续时间为 1000 毫秒
 let g:highlightedyank_highlight_duration = 1000
 
@@ -308,6 +310,7 @@ Plug 'pbrisbin/vim-mkdir'
 "变量函数查看
 Plug 'majutsushi/tagbar'
 nmap <F8> :TagbarToggle<CR>
+let g:tagbar_left = 0
 let g:tagbar_compact = 1
 let g:tagbar_indent = 1
 let g:tagbar_show_visibility = 1
@@ -316,6 +319,7 @@ let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
+let g:tagbar_width = 25
 
 let g:tagbar_type_go = {
 			\ 'ctagstype' : 'go',
@@ -543,7 +547,7 @@ func! Compile()
 		"exec '!g++ -Wall % -o %< -std=c++11 -lmysqlclient'
 		exec '!gcc -Wall % -o %<'
 	elseif &filetype == 'cpp'
-		exec '!g++ -Wall % -o %< -std=c++11 -lpthread -lboost_thread -lboost_system'
+		exec '!g++ -Wall % -o %< -std=c++17 -lpthread -lboost_thread -lboost_system'
 		"exec '!clang++ -Wall % -o %< -std=c++11 -lpthread '
 		"exec '!clang++ -Wall % -o %< -std=c++11 -lmysqlcppconn'
 		"exec '!g++ -Wall % -o %< -std=c++17'
