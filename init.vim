@@ -3,13 +3,30 @@ call plug#begin('/home/yzz/.local/share/nvim/plugged')
 
 "注释自动生成
 Plug 'vim-scripts/DoxygenToolkit.vim'
+let g:DoxygenToolkit_briefTag_funcName = "yes"
+
+" for C++ style, change the '@' to '\'
+let g:DoxygenToolkit_commentType = "C++"
+let g:DoxygenToolkit_briefTag_pre = "\\brief "
+let g:DoxygenToolkit_templateParamTag_pre = "\\tparam "
+let g:DoxygenToolkit_paramTag_pre = "\\param "
+let g:DoxygenToolkit_returnTag = "\\return "
+let g:DoxygenToolkit_throwTag_pre = "\\throw " " @exception is also valid
+let g:DoxygenToolkit_fileTag = "\\file "
+let g:DoxygenToolkit_dateTag = "\\date "
+let g:DoxygenToolkit_authorTag = "\\author "
+let g:DoxygenToolkit_versionTag = "\\version "
+let g:DoxygenToolkit_blockTag = "\\name "
+let g:DoxygenToolkit_classTag = "\\class "
+let g:DoxygenToolkit_authorName = "yuzz"
+let g:doxygen_enhanced_color = 1
+"let g:load_doxygen_syntax = 1
 
 "Go语言
 Plug 'fatih/vim-go'
 
-".h和.cpp跳转
+".h和.cpp切换
 Plug 'derekwyatt/vim-fswitch'
-nmap <Leader>f :FSHere<CR>
 
 "cmake
 Plug 'rperier/vim-cmake-syntax'
@@ -53,13 +70,13 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 "markdown预览
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
-"markdown语法
-Plug 'plasticboy/vim-markdown'
-let g:vim_markdown_folding_disabled = 1
-let g:vim_markdown_no_default_key_mappings = 1
-let g:vim_markdown_toc_autofit = 1
-let g:vim_markdown_conceal = 0
+Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
+"let g:instant_markdown_slow = 1
+let g:instant_markdown_autostart = 0
+"let g:instant_markdown_open_to_the_world = 1
+"let g:instant_markdown_allow_unsafe_content = 1
+"let g:instant_markdown_allow_external_content = 0
+let g:instant_markdown_mathjax = 1
 
 "if/endif补全
 Plug 'tpope/vim-endwise'
@@ -69,8 +86,11 @@ Plug 'tpope/vim-fugitive'
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+"let g:airline#extensions#tabline#enabled = 1
 let g:airline_extensions = ['tabline']
 let g:airline_theme='dark_minimal'
+"let g:airline#extensions#tabline#tab_nr_type = 0 " # of splits (default)
+"let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
 let g:airline#extensions#tabline#tab_nr_type = 2 " splits and tab number
 let g:airline#extensions#tabline#tabnr_formatter = 'tabnr'
 "显示时间
@@ -79,7 +99,6 @@ let g:airline#extensions#tabline#tabnr_formatter = 'tabnr'
 let g:airline_section_c = '%{getcwd()}'
 "显示git status
 let g:airline_section_b = '%{FugitiveStatusline()}'
-
 "unicode symbols
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#languageclient#enabled = 1
@@ -118,16 +137,16 @@ let g:airline_left_sep = '»'
 let g:airline_left_alt_sep = '❯'
 "let g:airline_left_sep = '▶'
 let g:airline_right_sep = '«'
-let g:airline_right_alt_sep = '❮'
-"let g:airline_right_alt_sep = '<-'
+"let g:airline_right_alt_sep = '❮'
+let g:airline_right_alt_sep = '<-'
 "let g:airline_right_sep = '◀'
 let g:airline_symbols.crypt = '🔒'
 "let g:airline_symbols.linenr = '☰'
 "let g:airline_symbols.linenr = '␊'
 let g:airline_symbols.linenr = '␤'
-"let g:airline_symbols.maxlinenr = ''
-let g:airline_symbols.maxlinenr = '㏑'
+let g:airline_symbols.maxlinenr = ''
 "let g:airline_symbols.linenr = '¶'
+"let g:airline_symbols.maxlinenr = '㏑'
 let g:airline_symbols.branch = '⎇'
 "let g:airline_symbols.paste = 'ρ'
 "let g:airline_symbols.paste = 'Þ'
@@ -154,6 +173,8 @@ let g:NERDCompactSexyComs = 1
 let g:NERDDefaultAlign = 'left'
 " Set a language to use its alternate delimiters by default
 let g:NERDAltDelims_java = 1
+" Add your own custom formats or override the defaults
+"let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
 " Allow commenting and inverting empty lines (useful when commenting a region)
 let g:NERDCommentEmptyLines = 1
 " Enable trimming of trailing whitespace when uncommenting
@@ -176,7 +197,7 @@ let g:indentLine_bgcolor_term = 256
 "代码自动 format 插件
 Plug 'chiel92/vim-autoformat'
 noremap <F9> :Autoformat<CR>:w<CR><CR>
-let g:formatdef_my_cpp = '"astyle --style=java --pad-oper"'
+let g:formatdef_my_cpp = '"astyle --attach-namespaces --attach-inlines --attach-classes --indent-classes --indent-col1-comments --pad-oper"'
 let g:formatters_cpp = ['my_cpp']
 "let g:formatdef_allman = '"astyle --style=allman --pad-oper"'
 "let g:formatexpr
@@ -241,9 +262,16 @@ let g:ale_echo_msg_warning_str = 'W'
 "let g:ale_echo_msg_format = '[%linter%] %code: %%s'
 let g:ale_echo_cursor = 1
 "use the quickfix list instead of the loclist
+let g:ale_open_list = 1
 "Show 5 lines of errors (default: 10)
-"let g:ale_list_window_size = 3
+let g:ale_list_window_size = 3
+let g:ale_set_quickfix = 0
+let g:ale_keep_list_window_open = 0
+let g:ale_set_loclist = 0
+let g:ale_set_balloons = 1
 let g:ale_open_list = 0
+"Show 5 lines of errors (default: 10)
+let g:ale_list_window_size = 3
 let g:ale_set_quickfix = 1
 let g:ale_keep_list_window_open = 0
 let g:ale_set_loclist = 1
@@ -270,6 +298,7 @@ let g:ale_cmakelint_executable = '/home/yzz/snap/anaconda3/bin/cmakelint'
 
 "高亮显示复制区域
 Plug 'machakann/vim-highlightedyank'
+
 " 高亮持续时间为 1000 毫秒
 let g:highlightedyank_highlight_duration = 1000
 
@@ -516,7 +545,7 @@ func! Compile()
 		"exec '!g++ -Wall % -o %< -std=c++11 -lmysqlclient'
 		exec '!gcc -Wall % -o %<'
 	elseif &filetype == 'cpp'
-		exec '!g++ -Wall % -o %< -std=c++17'
+		exec '!g++ -Wall % -o %< -std=c++17 -lpthread -lboost_thread -lboost_system'
 		"exec '!clang++ -Wall % -o %< -std=c++11 -lpthread '
 		"exec '!clang++ -Wall % -o %< -std=c++11 -lmysqlcppconn'
 		"exec '!g++ -Wall % -o %< -std=c++17'
@@ -540,19 +569,15 @@ func! Run()
 		exec '!time ./%<'
 	elseif &filetype == 'python'
 		exec '!time python %'
-	elseif &filetype == 'java'
-		exec '!java %<'
 	elseif &filetype == 'go'
 		exec 'GoRun'
 	elseif &filetype == 'sh'
 		:!time bash %
+	elseif &filetype == 'java'
+		exec '!java %'
 	endif
 endfunc
 
-"nmap <F2> :make<CR>
-"nmap <F3> :make run<CR>
-"nmap <F4> :make clean<CR>
-
-nmap <F2> :!cd build && cmake ..<CR>
-nmap <F3> :!cd build && make<CR>
-nmap <F4> :!cd build && make run<CR>
+map <F2> :make<CR>
+map <F3> :make run<CR>
+map <F4> :make clean<CR>

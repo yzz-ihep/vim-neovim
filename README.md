@@ -31,7 +31,7 @@ NVIM v0.3.8
 |                   vim-go                    |            Go语言支持            |
 |                YouCompleteMe                |           语句补全插件           |
 |           ultisnips和vim-snippets           |             代码片段             |
-| markdown-preview.nvim和plasticboy/vim-markdown |           markdown预览和语法显示           |
+|             vim-instant-markdown            |           markdown预览           |
 |                 vim-endwise                 |           if/endif补全           |
 |       vim-airline和vim-airline-themes       |              状态栏              |
 |                 indentline                  |            对齐可视化            |
@@ -59,8 +59,8 @@ NVIM v0.3.8
 1. vim-plug：需要手动安装，其他插件在vim（neovim）中执行PlugInsatll就可以
 
 2. vim-devicons：为nerdtree和其他插件提供图标，终端字体必须设置为Droid Sans Mono Nerd Font
-	+ 在https://github.com/ryanoasis/nerd-fonts/releases下载字体并用Font Manager安装
-	+ Dconf Editor修改终端字体为Droid Sans Mono Nerd Font
++ 在https://github.com/ryanoasis/nerd-fonts/releases下载字体并用Font Manager安装
++ Dconf Editor修改终端字体为Droid Sans Mono Nerd Font
 
 
 3. YouCompleteMe：需要自己编译，可能需要安装一些库，请自己查看YouCompleteMe的README文件
@@ -73,3 +73,7 @@ sudo aptitude install astyle clang-format python-pep8 python3-pep8 python-autope
 5. vim-cmake-completion：补全时需要ctrl+x、ctrl+o呼出补全菜单
 
 6. vim-go：因为墙的问题可能无法下载包，解决方法，比如golint需要在github下载后放到$GOPATH/src/golang.org/x/lint目录下再执行GoInstallBinaries
+
+7. vim-instant-markdown需要安装nodejs,命令如下：sudo apt-get install -y nodejs && sudo npm install npm -g && sudo npm -g install instant-markdown-d
++ 在https://github.com/ryanoasis/nerd-fonts/releases下载字体并用Font Manager安装
++ Dconf Editor修改终端字体为Droid Sans Mono Nerd Font
