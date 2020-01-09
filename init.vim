@@ -1,5 +1,3 @@
-"安装插件位置
-call plug#begin('~/.local/share/nvim/plugged')
 " 安装插件位置
 call plug#begin('/home/yzz/.local/share/nvim/plugged')
 
@@ -9,17 +7,6 @@ let g:DoxygenToolkit_briefTag_funcName = "yes"
 
 " for C++ style, change the '@' to '\'
 let g:DoxygenToolkit_commentType = "C++"
-let g:DoxygenToolkit_briefTag_pre = "\\brief "
-let g:DoxygenToolkit_templateParamTag_pre = "\\tparam "
-let g:DoxygenToolkit_paramTag_pre = "\\param "
-let g:DoxygenToolkit_returnTag = "\\return "
-let g:DoxygenToolkit_throwTag_pre = "\\throw " " @exception is also valid
-let g:DoxygenToolkit_fileTag = "\\file "
-let g:DoxygenToolkit_dateTag = "\\date "
-let g:DoxygenToolkit_authorTag = "\\author "
-let g:DoxygenToolkit_versionTag = "\\version "
-let g:DoxygenToolkit_blockTag = "\\name "
-let g:DoxygenToolkit_classTag = "\\class "
 let g:DoxygenToolkit_authorName = "yuzz"
 let g:doxygen_enhanced_color = 1
 "let g:load_doxygen_syntax = 1
@@ -48,18 +35,17 @@ let g:ycm_global_ycm_extra_conf = '~/.local/share/nvim/plugged/YouCompleteMe/thi
 let g:ycm_key_invoke_completion=""
 let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
 let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']  " 映射按键,没有这个会拦截掉tab, 导致其他插件的tab不能用.
-let g:ycm_key_list_stop_completion = ['<CR>']              " 停止匹配
+let g:ycm_key_list_stop_completion = ['<CR>']               " 停止匹配
 let g:ycm_collect_identifiers_from_comments_and_strings = 1 " 注释和字符串中的文字也会被收入补全
 let g:ycm_global_ycm_extra_conf = '/home/yzz/.local/share/nvim/plugged/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py'
 let g:ycm_show_diagnostics_ui = 0                           " 禁用语法检查
 let g:ycm_max_diagnostics_to_display = 0
 let g:ycm_min_num_of_chars_for_completion=2                 " 从第2个键入字符就开始罗列匹配项 "
-let g:ycm_python_binary_path = '/home/yzz/snap/anaconda3/bin/python3'
+let g:ycm_python_binary_path = '/home/yzz/Softerware/anaconda3/bin/python3'
 let g:ycm_seed_identifiers_with_syntax = 1                  " 语法关键字补全
 let g:ycm_show_diagnostics_ui = 0                           " 禁用语法检查
-"查询ultisnips提供的代码模板补全
 let g:YouCompleteMe#enable_at_startup=1
-"不查询ultisnips提供的代码模板补全，如果需要，设置成1即可
+"查询ultisnips提供的代码模板补全
 let g:ycm_use_ultisnips_completer = 1
 "nnoremap <leader>j :YcmCompleter GoToDefinitionElseDeclaration<CR>     " 跳转到定义处
 "let g:syntastic_ignore_files=[".*\.py$"]
@@ -98,9 +84,9 @@ let g:airline#extensions#tabline#tabnr_formatter = 'tabnr'
 "显示时间
 "let g:airline_section_b = '%{strftime("%T")}'
 "显示路径
-let g:airline_section_c = '%{getcwd()}'
+let g:airline_section_b = '%{getcwd()}'
 "显示git status
-let g:airline_section_b = '%{FugitiveStatusline()}'
+let g:airline_section_c = '%{FugitiveStatusline()}'
 "unicode symbols
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#languageclient#enabled = 1
@@ -524,8 +510,8 @@ map <C-l> <C-W>l
 nmap <leader>t :vs term://$SHELL<CR>
 
 "切换Buffer
-nnoremap <leader>j :bnext<CR>
-nnoremap <leader>k :bprevious<CR>
+nnoremap <leader>k :bnext<CR>
+nnoremap <leader>j :bprevious<CR>
 
 "回到上次打开位置
 if has("autocmd")
