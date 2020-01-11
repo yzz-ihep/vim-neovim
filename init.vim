@@ -25,6 +25,9 @@ let g:doxygen_enhanced_color = 1
 "Go语言
 Plug 'fatih/vim-go'
 
+"Rust语言
+Plug 'rust-lang/rust.vim'
+
 ".h和.cpp切换
 Plug 'derekwyatt/vim-fswitch'
 
@@ -55,9 +58,8 @@ let g:ycm_min_num_of_chars_for_completion=2                 " 从第2个键入�
 let g:ycm_python_binary_path = '/home/yzz/snap/anaconda3/bin/python3'
 let g:ycm_seed_identifiers_with_syntax = 1                  " 语法关键字补全
 let g:ycm_show_diagnostics_ui = 0                           " 禁用语法检查
-"查询ultisnips提供的代码模板补全
 let g:YouCompleteMe#enable_at_startup=1
-"不查询ultisnips提供的代码模板补全，如果需要，设置成1即可
+"查询ultisnips提供的代码模板补全
 let g:ycm_use_ultisnips_completer = 1
 "nnoremap <leader>j :YcmCompleter GoToDefinitionElseDeclaration<CR>     " 跳转到定义处
 "let g:syntastic_ignore_files=[".*\.py$"]
@@ -96,9 +98,9 @@ let g:airline#extensions#tabline#tabnr_formatter = 'tabnr'
 "显示时间
 "let g:airline_section_b = '%{strftime("%T")}'
 "显示路径
-let g:airline_section_c = '%{getcwd()}'
+let g:airline_section_b = '%{getcwd()}'
 "显示git status
-let g:airline_section_b = '%{FugitiveStatusline()}'
+let g:airline_section_c = '%{FugitiveStatusline()}'
 "unicode symbols
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#languageclient#enabled = 1
@@ -196,7 +198,7 @@ let g:indentLine_bgcolor_term = 256
 
 "代码自动 format 插件
 Plug 'chiel92/vim-autoformat'
-noremap <F9> :Autoformat<CR>:w<CR><CR>
+noremap <F9> :Autoformat<CR>:w<CR>
 let g:formatdef_my_cpp = '"astyle --attach-namespaces --attach-inlines --attach-classes --indent-classes --indent-col1-comments --pad-oper"'
 let g:formatters_cpp = ['my_cpp']
 "let g:formatdef_allman = '"astyle --style=allman --pad-oper"'
@@ -400,6 +402,8 @@ nnoremap <C-A> ggVG
 vnoremap <C-c> "+y
 
 "实用设置
+" 'compatible' is not set
+set nocp
 "侦测文件类型
 filetype on
 "载入文件类型插件
