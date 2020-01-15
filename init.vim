@@ -12,6 +12,9 @@ let g:doxygen_enhanced_color = 1
 "Go语言
 Plug 'fatih/vim-go'
 
+"Rust语言
+Plug 'rust-lang/rust.vim'
+
 ".h和.cpp切换
 Plug 'derekwyatt/vim-fswitch'
 
@@ -182,7 +185,7 @@ let g:indentLine_bgcolor_term = 256
 
 "代码自动 format 插件
 Plug 'chiel92/vim-autoformat'
-noremap <F9> :Autoformat<CR>:w<CR><CR>
+noremap <F9> :Autoformat<CR>:w<CR>
 let g:formatdef_my_cpp = '"astyle --attach-namespaces --attach-inlines --attach-classes --indent-classes --indent-col1-comments --pad-oper"'
 let g:formatters_cpp = ['my_cpp']
 "let g:formatdef_allman = '"astyle --style=allman --pad-oper"'
@@ -379,6 +382,8 @@ nnoremap <C-A> ggVG
 vnoremap <C-c> "+y
 
 "实用设置
+" 'compatible' is not set
+set nocp
 "侦测文件类型
 filetype on
 "载入文件类型插件
