@@ -1,12 +1,10 @@
-" 安装插件位置
+"安装插件位置
 call plug#begin('/home/yzz/.local/share/nvim/plugged')
 
 "注释自动生成
 Plug 'vim-scripts/DoxygenToolkit.vim'
 let g:DoxygenToolkit_briefTag_funcName = "yes"
 
-" for C++ style, change the '@' to '\'
-let g:DoxygenToolkit_commentType = "C++"
 let g:DoxygenToolkit_authorName = "yuzz"
 let g:doxygen_enhanced_color = 1
 "let g:load_doxygen_syntax = 1
@@ -59,12 +57,12 @@ Plug 'honza/vim-snippets'
 
 "markdown预览
 Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
-"let g:instant_markdown_slow = 1
 let g:instant_markdown_autostart = 0
-"let g:instant_markdown_open_to_the_world = 1
+let g:instant_markdown_mathjax = 1
+let g:instant_markdown_open_to_the_world = 1
+"let g:instant_markdown_slow = 1
 "let g:instant_markdown_allow_unsafe_content = 1
 "let g:instant_markdown_allow_external_content = 0
-let g:instant_markdown_mathjax = 1
 
 "if/endif补全
 Plug 'tpope/vim-endwise'
@@ -251,20 +249,13 @@ let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_cursor = 1
 "use the quickfix list instead of the loclist
 let g:ale_open_list = 1
+let g:ale_completion_enabled = 0
 "Show 5 lines of errors (default: 10)
 let g:ale_list_window_size = 3
 let g:ale_set_quickfix = 0
 let g:ale_keep_list_window_open = 0
 let g:ale_set_loclist = 0
 let g:ale_set_balloons = 1
-let g:ale_open_list = 0
-"Show 5 lines of errors (default: 10)
-let g:ale_list_window_size = 3
-let g:ale_set_quickfix = 1
-let g:ale_keep_list_window_open = 0
-let g:ale_set_loclist = 1
-let g:ale_set_balloons = 0
-let g:ale_completion_enabled = 0
 let g:ale_c_clang_options = 'std=c17 -Wall'
 let g:ale_cpp_clangcheck_option = 'std=c17 -Wall'
 let g:ale_cpp_clang_gcc_options = 'std=c17 -Wall'
@@ -403,8 +394,6 @@ set completeopt-=preview
 set completeopt=longest,menu
 "设置背景为黑色
 set background=dark
-"代码补全
-"set completeopt=preview,menu
 "共享剪贴板
 set clipboard=unnamed
 "自动保存
@@ -420,32 +409,32 @@ set foldcolumn=0
 set foldmethod=indent
 set foldlevel=3
 "set foldenable             " 开始折叠
-set nofoldenable            "禁用折叠
-" 不要使用vi的键盘模式，而是vim自己的
+"set nofoldenable            "禁用折叠
+"不要使用vi的键盘模式，而是vim自己的
 set nocompatible
-" 语法高亮
+"语法高亮
 set syntax=on
 syntax enable
-" 去掉输入错误的提示声音
+"去掉输入错误的提示声音
 set noeb
-" 在处理未保存或只读文件的时候，弹出确认
+"在处理未保存或只读文件的时候，弹出确认
 set confirm
-" 自动缩进
+"自动缩进
 set autoindent
 "set cindent
-" Tab键的宽度
+"Tab键的宽度
 set tabstop=4
-" 统一缩进为4
+"统一缩进为4
 set softtabstop=4
 set shiftwidth=4
-" 不要用空格代替制表符
+"不要用空格代替制表符
 set noexpandtab
-" 在行和段开始处使用制表符
+"在行和段开始处使用制表符
 set smarttab
-" 显示行号
+"显示行号
 set number
 set numberwidth=1
-" 历史记录数
+"历史记录数
 set history=1000
 "禁止生成临时文件
 set nobackup
@@ -476,7 +465,10 @@ set iskeyword+=_,$,@,%,#,-
 set linespace=1
 "增强模式中的命令行自动完成操作
 set wildmenu
+"Ignore compiled files
+set wildignore=*.o,*~,*.pyc,*.class
 "使回格键（backspace）正常处理indent, eol, start等
+set backspace=eol,start,indent
 set backspace=2
 "允许backspace和光标键跨越行边界
 "set whichwrap+=<,>,h,l
@@ -485,7 +477,7 @@ set mouse=a
 set selection=exclusive
 set selectmode=mouse,key
 "通过使用: commands命令，告诉我们文件的哪一行被改变过
-set report=0
+set report=1
 "高亮显示匹配的括号
 set showmatch
 "hi MatchParen ctermbg=blue ctermfg=white
@@ -498,8 +490,6 @@ set matchtime=1
 set scrolloff=3
 "为C程序提供自动缩进
 set smartindent
-" 高亮显示普通txt文件（需要txt.vim脚本）
-au BufRead,BufNewFile *  setfiletype txt
 "Smart way to move between windows
 map <C-j> <C-W>j
 map <C-k> <C-W>k
@@ -512,6 +502,10 @@ nmap <leader>t :vs term://$SHELL<CR>
 "切换Buffer
 nnoremap <leader>k :bnext<CR>
 nnoremap <leader>j :bprevious<CR>
+
+"A buffer becomes hidden when it is abandoned
+set hidden
+set ttyfast
 
 "回到上次打开位置
 if has("autocmd")
@@ -533,7 +527,7 @@ func! Compile()
 		"exec '!g++ -Wall % -o %< -std=c++11 -lmysqlclient'
 		exec '!gcc -Wall % -o %<'
 	elseif &filetype == 'cpp'
-		exec '!g++ -Wall % -o %< -std=c++17 -lpthread -lboost_thread -lboost_system'
+		exec '!g++ -Wall % -o %< -std=c++17'
 		"exec '!clang++ -Wall % -o %< -std=c++11 -lpthread '
 		"exec '!clang++ -Wall % -o %< -std=c++11 -lmysqlcppconn'
 		"exec '!g++ -Wall % -o %< -std=c++17'

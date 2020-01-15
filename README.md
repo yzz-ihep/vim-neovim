@@ -59,8 +59,9 @@ NVIM v0.3.8
 1. vim-plug：需要手动安装，其他插件在vim（neovim）中执行PlugInsatll就可以
 
 2. vim-devicons：为nerdtree和其他插件提供图标，终端字体必须设置为Droid Sans Mono Nerd Font
-+ 在https://github.com/ryanoasis/nerd-fonts/releases下载字体并用Font Manager安装
-+ Dconf Editor修改终端字体为Droid Sans Mono Nerd Font
+
+	+ 在https://github.com/ryanoasis/nerd-fonts/releases下载字体并用Font Manager安装
+	+ Dconf Editor修改终端字体为Droid Sans Mono Nerd Font
 
 
 3. YouCompleteMe：需要自己编译，可能需要安装一些库，请自己查看YouCompleteMe的README文件
@@ -75,5 +76,8 @@ sudo aptitude install astyle clang-format python-pep8 python3-pep8 python-autope
 6. vim-go：因为墙的问题可能无法下载包，解决方法，比如golint需要在github下载后放到$GOPATH/src/golang.org/x/lint目录下再执行GoInstallBinaries
 
 7. vim-instant-markdown需要安装nodejs,命令如下：sudo apt-get install -y nodejs && sudo npm install npm -g && sudo npm -g install instant-markdown-d
-+ 在https://github.com/ryanoasis/nerd-fonts/releases下载字体并用Font Manager安装
-+ Dconf Editor修改终端字体为Droid Sans Mono Nerd Font
+
+	+ 在https://github.com/ryanoasis/nerd-fonts/releases下载字体并用Font Manager安装
+	+ Dconf Editor修改终端字体为Droid Sans Mono Nerd Font
+
+8. 安装时请修改插件安装位置
